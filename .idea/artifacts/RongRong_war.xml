@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="RongRong:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <root id="archive" name="mengyou.war">
+      <element id="artifact" artifact-name="RongRong:war exploded" />
+    </root>
+  </artifact>
+</component>

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.rongrong.dao.PrPraiseTbMapper">
+
+<resultMap id="prPraiseTbResultMap" type="com.rongrong.model.PrPraiseTb">
+	<id column="id" property="id"/>
+	<result column="project_id" property="projectId" />
+	<result column="praise_user_id" property="praiseUserId" />
+	<result column="create_time" property="createTime" /> 
+</resultMap> 
+<insert id="save" parameterType="com.rongrong.model.PrPraiseTb" useGeneratedKeys="true" keyProperty="id">
+	insert into `pr_praise_tb`(
+	<trim suffixOverrides=",">
+		<if test="projectId != null">`project_id`,</if>
+		<if test="praiseUserId != null">`praise_user_id`,</if>
+		<if test="createTime != null">`create_time`,</if>
+	</trim>
+	)values(
+	<trim suffixOverrides=",">
+		<if test="projectId != null"> #{projectId},</if>
+		<if test="praiseUserId != null"> #{praiseUserId},</if>
+		<if test="createTime != null"> #{createTime},</if>
+	</trim>
+	)
+</insert>
+<update id="update" parameterType="com.rongrong.model.PrPraiseTb">
+	update `pr_praise_tb`
+	<trim prefix="set" suffixOverrides=",">
+		<if test="projectId != null">`project_id` = #{projectId},</if>
+		<if test="praiseUserId != null">`praise_user_id` = #{praiseUserId},</if>
+		<if test="createTime != null">`create_time` = #{createTime},</if>
+	</trim>
+	where `id` = #{id}
+</update>
+<select id="getBy" parameterType="com.rongrong.model.PrPraiseTb" resultMap="prPraiseTbResultMap">
+	select * from `pr_praise_tb`
+	<trim prefix="where" prefixOverrides="AND|OR">
+		<if test="id != null">AND `id` = #{id} </if>
+		<if test="projectId != null">AND `project_id` = #{projectId} </if>
+		<if test="praiseUserId != null">AND `praise_user_id` = #{praiseUserId} </if>
+		<if test="createTime != null">AND `create_time` = #{createTime} </if>
+	</trim>
+</select>
+<select id="getConditionBy" parameterType="com.rongrong.model.PrPraiseTb" resultMap="prPraiseTbResultMap">
+	select * from `pr_praise_tb`
+	<trim prefix="where" prefixOverrides="AND|OR">
+		<if test="id != null">AND `id` = #{id} </if>
+		<if test="projectId != null">AND `project_id` = #{projectId} </if>
+		<if test="praiseUserId != null">AND `praise_user_id` = #{praiseUserId} </if>
+		<if test="createTime != null">AND `create_time` = #{createTime} </if> 
+		<if test="maxParameter != null">AND ${maxParameter} &lt;= #{maxValue}</if>
+		<if test="minParameter != null"> AND ${minParameter} &gt; #{minValue}</if>
+	</trim>
+	<trim prefix="ORDER BY" prefixOverrides="," suffixOverrides=",">
+		<if test="sequence1 != null">${sequence1} ${sequence1Type},</if>
+		<if test="sequence2 != null">${sequence2} ${sequence2Type}</if>
+	</trim>
+	<trim prefix="LIMIT">
+		<if test="skipNum != null and pageNum != null"> ${skipNum},${pageNum}</if>
+	</trim>
+</select>
+<select id="getUniqueBy" parameterType="com.rongrong.model.PrPraiseTb" resultMap="prPraiseTbResultMap">
+	select * from `pr_praise_tb`
+	<trim prefix="where" prefixOverrides="AND|OR">
+		<if test="id != null">AND `id` = #{id} </if>
+		<if test="projectId != null">AND `project_id` = #{projectId} </if>
+		<if test="praiseUserId != null">AND `praise_user_id` = #{praiseUserId} </if>
+		<if test="createTime != null">AND `create_time` = #{createTime} </if>
+	</trim>
+</select>
+<select id="count" parameterType="com.rongrong.model.PrPraiseTb" resultType="java.lang.Integer">
+	select count(*) from `pr_praise_tb`
+	<trim prefix="where" prefixOverrides="AND|OR">
+		<if test="projectId != null">AND `project_id` = #{projectId} </if>
+		<if test="praiseUserId != null">AND `praise_user_id` = #{praiseUserId} </if>
+		<if test="createTime != null">AND `create_time` = #{createTime} </if>
+	</trim>
+</select>
+</mapper>
