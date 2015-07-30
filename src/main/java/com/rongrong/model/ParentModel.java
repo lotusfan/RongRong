@@ -3,6 +3,7 @@ package com.rongrong.model;
 public class ParentModel {
     private Integer skipNum;
     private Integer pageNum;
+    private Integer currentPage;
     private String sequence1;
     private String sequence1Type;
     private String sequence2;
@@ -11,6 +12,15 @@ public class ParentModel {
     private String maxValue;
     private String minParameter;
     private String minValue;
+
+
+    public Integer getCurrentPage() {
+        return currentPage;
+    }
+
+    public void setCurrentPage(Integer currentPage) {
+        this.currentPage = currentPage;
+    }
 
     public Integer getSkipNum() {
         return skipNum;

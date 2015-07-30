@@ -1,4 +1,4 @@
-package com.rongrong.service.transactionmanager;
+package com.rongrong.dao.transactionmanager;
 
 import com.rongrong.dao.LogInfoMapper;
 import com.rongrong.model.LogInfo;

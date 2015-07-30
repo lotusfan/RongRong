@@ -49,7 +49,7 @@
      </tx:advice>
 
      <aop:config>
-            <aop:pointcut id="pc" expression="execution(public * com.rongrong.service.transactionmanager.*.*(..))" /> <!--把事务控制在Service层-->
+            <aop:pointcut id="pc" expression="execution(public * com.rongrong.dao.transactionmanager.*.*(..))" /> <!--把事务控制在Service层-->
             <aop:advisor pointcut-ref="pc" advice-ref="userTxAdvice" />
      </aop:config>
 

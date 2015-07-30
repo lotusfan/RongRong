@@ -6,6 +6,7 @@ import java.math.BigDecimal;
 public class ProjectTb extends ParentModel{
 
 	private Integer id; //
+    private Integer userId;
 	private String title; //
 	private Float acceptCost; //
 	private String mainBody; //
@@ -14,16 +15,26 @@ public class ProjectTb extends ParentModel{
 	private String measure; //
 	private String define; //
 	private String summary; //
+    private int status;
 	private Timestamp createTime; //
 	private Timestamp updateTime; //
 
-	public Integer getId() {
+    public Integer getId() {
 		return id;
 	}
 	public void setId (Integer id) {
 		this.id = id;
 	}
-	public String getTitle() {
+
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
+    }
+
+    public String getTitle() {
 		return title;
 	}
 	public void setTitle (String title) {
@@ -71,7 +82,16 @@ public class ProjectTb extends ParentModel{
 	public void setSummary (String summary) {
 		this.summary = summary;
 	}
-	public Timestamp getCreateTime() {
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
+    public Timestamp getCreateTime() {
 		return createTime;
 	}
 	public void setCreateTime (Timestamp createTime) {
@@ -83,4 +103,24 @@ public class ProjectTb extends ParentModel{
 	public void setUpdateTime (Timestamp updateTime) {
 		this.updateTime = updateTime;
 	}
+
+
+    @Override
+    public String toString() {
+        return "ProjectTb{" +
+                "id=" + id +
+                ", userId=" + userId +
+                ", title='" + title + '\'' +
+                ", acceptCost=" + acceptCost +
+                ", mainBody='" + mainBody + '\'' +
+                ", ammount=" + ammount +
+                ", timeLimit='" + timeLimit + '\'' +
+                ", measure='" + measure + '\'' +
+                ", define='" + define + '\'' +
+                ", summary='" + summary + '\'' +
+                ", status=" + status +
+                ", createTime=" + createTime +
+                ", updateTime=" + updateTime +
+                '}';
+    }
 }

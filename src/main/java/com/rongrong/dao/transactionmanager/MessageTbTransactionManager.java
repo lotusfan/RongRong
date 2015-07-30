@@ -1,7 +1,8 @@
-package com.rongrong.service.transactionmanager;
+package com.rongrong.dao.transactionmanager;
 
 import com.rongrong.dao.MessageTbMapper;
 import com.rongrong.model.MessageTb;
+import com.rongrong.model.requestview.CardView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -58,6 +59,14 @@ public class MessageTbTransactionManager {
     public Integer count(MessageTb messageTb) {
 
         return messageTbMapper.count(messageTb);
+    }
+
+    public List<CardView> getSendCardConditionBy(MessageTb messageTb) {
+        return messageTbMapper.getSendCardConditionBy(messageTb);
+    }
+
+    public List<CardView> getReceiveCardConditionBy(MessageTb messageTb) {
+        return messageTbMapper.getReceiveCardConditionBy(messageTb);
     }
 
 }

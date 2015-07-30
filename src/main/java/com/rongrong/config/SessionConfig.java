@@ -9,7 +9,7 @@ import org.springframework.session.web.http.HttpSessionStrategy;
 /**
  * Created by zhangfan on 2015/7/7.
  */
-@EnableRedisHttpSession
+//@EnableRedisHttpSession
 public class SessionConfig
 {
     @Bean

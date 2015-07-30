@@ -5,6 +5,10 @@
 <resultMap id="prShareTbResultMap" type="com.rongrong.model.PrShareTb">
 	<id column="id" property="id"/>
 	<result column="project_id" property="projectId" />
+    <result column="name_real" property="nameReal"/>
+    <result column="company_address" property="companyAddress"/>
+    <result column="company" property="company"/>
+    <result column="position" property="position"/>
 	<result column="share_user_id" property="shareUserId" />
 	<result column="create_time" property="createTime" /> 
 </resultMap> 
@@ -33,7 +37,7 @@
 	where `id` = #{id}
 </update>
 <select id="getBy" parameterType="com.rongrong.model.PrShareTb" resultMap="prShareTbResultMap">
-	select * from `pr_share_tb`
+	select * from `pr_share_tb` as p LEFT JOIN `user_tb` as u on p.share_user_id = u.id
 	<trim prefix="where" prefixOverrides="AND|OR">
 		<if test="id != null">AND `id` = #{id} </if>
 		<if test="projectId != null">AND `project_id` = #{projectId} </if>
@@ -42,7 +46,7 @@
 	</trim>
 </select>
 <select id="getConditionBy" parameterType="com.rongrong.model.PrShareTb" resultMap="prShareTbResultMap">
-	select * from `pr_share_tb`
+	select * from `pr_share_tb` as p LEFT JOIN `user_tb` as u on p.share_user_id = u.id
 	<trim prefix="where" prefixOverrides="AND|OR">
 		<if test="id != null">AND `id` = #{id} </if>
 		<if test="projectId != null">AND `project_id` = #{projectId} </if>
@@ -60,7 +64,7 @@
 	</trim>
 </select>
 <select id="getUniqueBy" parameterType="com.rongrong.model.PrShareTb" resultMap="prShareTbResultMap">
-	select * from `pr_share_tb`
+	select * from `pr_share_tb` as p LEFT JOIN `user_tb` as u on p.share_user_id = u.id
 	<trim prefix="where" prefixOverrides="AND|OR">
 		<if test="id != null">AND `id` = #{id} </if>
 		<if test="projectId != null">AND `project_id` = #{projectId} </if>

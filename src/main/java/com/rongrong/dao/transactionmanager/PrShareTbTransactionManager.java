@@ -1,4 +1,4 @@
-package com.rongrong.service.transactionmanager;
+package com.rongrong.dao.transactionmanager;
 
 import com.rongrong.dao.PrShareTbMapper;
 import com.rongrong.model.PrShareTb;
@@ -50,6 +50,10 @@ public class PrShareTbTransactionManager {
         return prShareTbMapper.getUniqueBy(prShareTb);
     }
 
+    public List<PrShareTb> getConditionBy(PrShareTb prShareTb) {
+
+        return prShareTbMapper.getConditionBy(prShareTb);
+    }
     public List<PrShareTb> getBy(PrShareTb prShareTb) {
 
         return prShareTbMapper.getBy(prShareTb);

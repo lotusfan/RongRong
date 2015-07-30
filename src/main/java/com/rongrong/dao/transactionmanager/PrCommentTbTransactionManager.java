@@ -1,4 +1,4 @@
-package com.rongrong.service.transactionmanager;
+package com.rongrong.dao.transactionmanager;
 
 import com.rongrong.dao.PrCommentTbMapper;
 import com.rongrong.model.PrCommentTb;
@@ -50,6 +50,10 @@ public class PrCommentTbTransactionManager {
         return prCommentTbMapper.getUniqueBy(prCommentTb);
     }
 
+    public List<PrCommentTb> getConditionBy(PrCommentTb prCommentTb) {
+
+        return prCommentTbMapper.getConditionBy(prCommentTb);
+    }
     public List<PrCommentTb> getBy(PrCommentTb prCommentTb) {
 
         return prCommentTbMapper.getBy(prCommentTb);

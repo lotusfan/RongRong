@@ -1,7 +1,8 @@
-package com.rongrong.service.transactionmanager;
+package com.rongrong.dao.transactionmanager;
 
 import com.rongrong.dao.ProjectTbMapper;
 import com.rongrong.model.ProjectTb;
+import com.rongrong.model.UserTb;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -50,14 +51,28 @@ public class ProjectTbTransactionManager {
         return projectTbMapper.getUniqueBy(projectTb);
     }
 
+    public ProjectTb getUserIdUniqueBy(ProjectTb projectTb) {
+
+        return projectTbMapper.getUserIdUniqueBy(projectTb);
+    }
+
     public List<ProjectTb> getBy(ProjectTb projectTb) {
 
         return projectTbMapper.getBy(projectTb);
+    }
+    public List<ProjectTb> getConditionBy(ProjectTb projectTb) {
+
+        return projectTbMapper.getConditionBy(projectTb);
     }
 
     public Integer count(ProjectTb projectTb) {
 
         return projectTbMapper.count(projectTb);
     }
+
+    public List<ProjectTb> personalRelateProjectList(UserTb user) {
+        return projectTbMapper.personalRelateProjectList(user);
+    }
+
 
 }

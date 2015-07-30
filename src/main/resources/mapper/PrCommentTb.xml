@@ -5,10 +5,11 @@
 <resultMap id="prCommentTbResultMap" type="com.rongrong.model.PrCommentTb">
 	<id column="id" property="id"/>
 	<result column="project_id" property="projectId" />
+	<result column="name_real" property="nameReal" />
 	<result column="user_id" property="userId" />
 	<result column="content" property="content" />
 	<result column="relation_user_id" property="relationUserId" />
-	<result column="create_id" property="createId" /> 
+	<result column="create_time" property="createTime" /> 
 </resultMap> 
 <insert id="save" parameterType="com.rongrong.model.PrCommentTb" useGeneratedKeys="true" keyProperty="id">
 	insert into `pr_comment_tb`(
@@ -17,7 +18,7 @@
 		<if test="userId != null">`user_id`,</if>
 		<if test="content != null">`content`,</if>
 		<if test="relationUserId != null">`relation_user_id`,</if>
-		<if test="createId != null">`create_id`,</if>
+		<if test="createTime != null">`create_time`,</if>
 	</trim>
 	)values(
 	<trim suffixOverrides=",">
@@ -25,7 +26,7 @@
 		<if test="userId != null"> #{userId},</if>
 		<if test="content != null"> #{content},</if>
 		<if test="relationUserId != null"> #{relationUserId},</if>
-		<if test="createId != null"> #{createId},</if>
+		<if test="createTime != null"> #{createTime},</if>
 	</trim>
 	)
 </insert>
@@ -36,30 +37,30 @@
 		<if test="userId != null">`user_id` = #{userId},</if>
 		<if test="content != null">`content` = #{content},</if>
 		<if test="relationUserId != null">`relation_user_id` = #{relationUserId},</if>
-		<if test="createId != null">`create_id` = #{createId},</if>
+		<if test="createTime != null">`create_time` = #{createTime},</if>
 	</trim>
 	where `id` = #{id}
 </update>
 <select id="getBy" parameterType="com.rongrong.model.PrCommentTb" resultMap="prCommentTbResultMap">
-	select * from `pr_comment_tb`
+	select * from `pr_comment_tb` as p LEFT JOIN `user_tb` as u on p.user_id = u.id
 	<trim prefix="where" prefixOverrides="AND|OR">
 		<if test="id != null">AND `id` = #{id} </if>
 		<if test="projectId != null">AND `project_id` = #{projectId} </if>
 		<if test="userId != null">AND `user_id` = #{userId} </if>
 		<if test="content != null">AND `content` = #{content} </if>
 		<if test="relationUserId != null">AND `relation_user_id` = #{relationUserId} </if>
-		<if test="createId != null">AND `create_id` = #{createId} </if>
+		<if test="createTime != null">AND `create_time` = #{createTime} </if>
 	</trim>
 </select>
 <select id="getConditionBy" parameterType="com.rongrong.model.PrCommentTb" resultMap="prCommentTbResultMap">
-	select * from `pr_comment_tb`
+	select * from `pr_comment_tb` as p LEFT JOIN `user_tb` as u on p.user_id = u.id
 	<trim prefix="where" prefixOverrides="AND|OR">
 		<if test="id != null">AND `id` = #{id} </if>
 		<if test="projectId != null">AND `project_id` = #{projectId} </if>
 		<if test="userId != null">AND `user_id` = #{userId} </if>
 		<if test="content != null">AND `content` = #{content} </if>
 		<if test="relationUserId != null">AND `relation_user_id` = #{relationUserId} </if>
-		<if test="createId != null">AND `create_id` = #{createId} </if> 
+		<if test="createTime != null">AND `create_time` = #{createTime} </if> 
 		<if test="maxParameter != null">AND ${maxParameter} &lt;= #{maxValue}</if>
 		<if test="minParameter != null"> AND ${minParameter} &gt; #{minValue}</if>
 	</trim>
@@ -72,14 +73,14 @@
 	</trim>
 </select>
 <select id="getUniqueBy" parameterType="com.rongrong.model.PrCommentTb" resultMap="prCommentTbResultMap">
-	select * from `pr_comment_tb`
+	select * from `pr_comment_tb` as p LEFT JOIN `user_tb` as u on p.user_id = u.id
 	<trim prefix="where" prefixOverrides="AND|OR">
 		<if test="id != null">AND `id` = #{id} </if>
 		<if test="projectId != null">AND `project_id` = #{projectId} </if>
 		<if test="userId != null">AND `user_id` = #{userId} </if>
 		<if test="content != null">AND `content` = #{content} </if>
 		<if test="relationUserId != null">AND `relation_user_id` = #{relationUserId} </if>
-		<if test="createId != null">AND `create_id` = #{createId} </if>
+		<if test="createTime != null">AND `create_time` = #{createTime} </if>
 	</trim>
 </select>
 <select id="count" parameterType="com.rongrong.model.PrCommentTb" resultType="java.lang.Integer">
@@ -89,7 +90,7 @@
 		<if test="userId != null">AND `user_id` = #{userId} </if>
 		<if test="content != null">AND `content` = #{content} </if>
 		<if test="relationUserId != null">AND `relation_user_id` = #{relationUserId} </if>
-		<if test="createId != null">AND `create_id` = #{createId} </if>
+		<if test="createTime != null">AND `create_time` = #{createTime} </if>
 	</trim>
 </select>
 </mapper>

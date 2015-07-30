@@ -148,7 +148,8 @@
 <select id="count" parameterType="com.rongrong.model.UserTb" resultType="java.lang.Integer">
 	select count(*) from `user_tb`
 	<trim prefix="where" prefixOverrides="AND|OR">
-		<if test="nameReal != null">AND `name_real` = #{nameReal} </if>
+        <if test="id != null">AND `id` = #{id}</if>
+        <if test="nameReal != null">AND `name_real` = #{nameReal} </if>
 		<if test="rrId != null">AND `rr_id` = #{rrId} </if>
 		<if test="sex != null">AND `sex` = #{sex} </if>
 		<if test="loginName != null">AND `login_name` = #{loginName} </if>

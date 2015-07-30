@@ -20,7 +20,26 @@ public class UserTb extends ParentModel{
 	private Timestamp createTime; //
 	private Timestamp updateTime; //
 
-	public Integer getId() {
+    //个人详情View
+    private int projectNum; //项目总数
+
+    public String geteMail() {
+        return eMail;
+    }
+
+    public void seteMail(String eMail) {
+        this.eMail = eMail;
+    }
+
+    public int getProjectNum() {
+        return projectNum;
+    }
+
+    public void setProjectNum(int projectNum) {
+        this.projectNum = projectNum;
+    }
+
+    public Integer getId() {
 		return id;
 	}
 	public void setId (Integer id) {

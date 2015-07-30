@@ -1,4 +1,4 @@
-package com.rongrong.service.transactionmanager;
+package com.rongrong.dao.transactionmanager;
 
 import com.rongrong.dao.PrPraiseTbMapper;
 import com.rongrong.model.PrPraiseTb;
@@ -48,6 +48,11 @@ public class PrPraiseTbTransactionManager {
     public PrPraiseTb getUniqueBy(PrPraiseTb prPraiseTb) {
 
         return prPraiseTbMapper.getUniqueBy(prPraiseTb);
+    }
+
+    public List<PrPraiseTb> getConditionBy(PrPraiseTb prPraiseTb) {
+
+        return prPraiseTbMapper.getConditionBy(prPraiseTb);
     }
 
     public List<PrPraiseTb> getBy(PrPraiseTb prPraiseTb) {
