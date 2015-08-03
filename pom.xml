@@ -216,7 +216,7 @@
 
     </dependencies>
     <build>
-        <finalName>mengyou</finalName>
+        <finalName>rongrong</finalName>
         <resources>
             <resource>
                 <directory>src/main/resources</directory>
@@ -269,7 +269,7 @@
                     <server>server-test</server>
                     <username>tomcat</username>
                     <password>tomcat</password>
-                    <path>/dream</path>
+                    <path>/rongrong</path>
                 </configuration>
             </plugin>
         </plugins>

@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.rongrong.dao.ProjectTbMapper">
+
+    <resultMap id="projectTbResultMap" type="com.rongrong.model.ProjectTb">
+        <id column="id" property="id"/>
+        <result column="user_id" property="userId"/>
+        <result column="title" property="title"/>
+        <result column="accept_cost" property="acceptCost"/>
+        <result column="main_body" property="mainBody"/>
+        <result column="ammount" property="ammount"/>
+        <result column="time_limit" property="timeLimit"/>
+        <result column="measure" property="measure"/>
+        <result column="define" property="define"/>
+        <result column="summary" property="summary"/>
+        <result column="status" property="status"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+    </resultMap>
+    <insert id="save" parameterType="com.rongrong.model.ProjectTb" useGeneratedKeys="true" keyProperty="id">
+        insert into `project_tb`(
+        <trim suffixOverrides=",">
+            <if test="userId != null">`user_id`,</if>
+            <if test="title != null">`title`,</if>
+            <if test="acceptCost != null">`accept_cost`,</if>
+            <if test="mainBody != null">`main_body`,</if>
+            <if test="ammount != null">`ammount`,</if>
+            <if test="timeLimit != null">`time_limit`,</if>
+            <if test="measure != null">`measure`,</if>
+            <if test="define != null">`define`,</if>
+            <if test="summary != null">`summary`,</if>
+            <if test="status != null">`status`,</if>
+            <if test="createTime != null">`create_time`,</if>
+            <if test="updateTime != null">`update_time`,</if>
+        </trim>
+        )values(
+        <trim suffixOverrides=",">
+            <if test="userId != null">#{userId},</if>
+            <if test="title != null">#{title},</if>
+            <if test="acceptCost != null">#{acceptCost},</if>
+            <if test="mainBody != null">#{mainBody},</if>
+            <if test="ammount != null">#{ammount},</if>
+            <if test="timeLimit != null">#{timeLimit},</if>
+            <if test="measure != null">#{measure},</if>
+            <if test="define != null">#{define},</if>
+            <if test="summary != null">#{summary},</if>
+            <if test="status != null">#{status},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+        </trim>
+        )
+    </insert>
+    <update id="update" parameterType="com.rongrong.model.ProjectTb">
+        update `project_tb`
+        <trim prefix="set" suffixOverrides=",">
+            <if test="userId != null">`user_id` = #{userId},</if>
+            <if test="title != null">`title` = #{title},</if>
+            <if test="acceptCost != null">`accept_cost` = #{acceptCost},</if>
+            <if test="mainBody != null">`main_body` = #{mainBody},</if>
+            <if test="ammount != null">`ammount` = #{ammount},</if>
+            <if test="timeLimit != null">`time_limit` = #{timeLimit},</if>
+            <if test="measure != null">`measure` = #{measure},</if>
+            <if test="define != null">`define` = #{define},</if>
+            <if test="summary != null">`summary` = #{summary},</if>
+            <if test="status != null">`status` = #{status},</if>
+            <if test="createTime != null">`create_time` = #{createTime},</if>
+            <if test="updateTime != null">`update_time` = #{updateTime},</if>
+        </trim>
+        where `id` = #{id}
+    </update>
+    <select id="getBy" parameterType="com.rongrong.model.ProjectTb" resultMap="projectTbResultMap">
+        select * from `project_tb`
+        <trim prefix="where" prefixOverrides="AND|OR">
+            <if test="id != null">AND `id` = #{id}</if>
+            <if test="userId != null">AND `user_id` = #{userId}</if>
+            <if test="title != null">AND `title` = #{title}</if>
+            <if test="acceptCost != null">AND `accept_cost` = #{acceptCost}</if>
+            <if test="mainBody != null">AND `main_body` = #{mainBody}</if>
+            <if test="ammount != null">AND `ammount` = #{ammount}</if>
+            <if test="timeLimit != null">AND `time_limit` = #{timeLimit}</if>
+            <if test="measure != null">AND `measure` = #{measure}</if>
+            <if test="define != null">AND `define` = #{define}</if>
+            <if test="summary != null">AND `summary` = #{summary}</if>
+            <if test="status != null">AND `status` = #{status}</if>
+            <if test="createTime != null">AND `create_time` = #{createTime}</if>
+            <if test="updateTime != null">AND `update_time` = #{updateTime}</if>
+        </trim>
+    </select>
+    <select id="getConditionBy" parameterType="com.rongrong.model.ProjectTb" resultMap="projectTbResultMap">
+        select * from `project_tb`
+        <trim prefix="where" prefixOverrides="AND|OR">
+            <if test="id != null">AND `id` = #{id}</if>
+            <if test="userId != null">AND `user_id` = #{userId}</if>
+            <if test="title != null">AND `title` = #{title}</if>
+            <if test="acceptCost != null">AND `accept_cost` = #{acceptCost}</if>
+            <if test="mainBody != null">AND `main_body` = #{mainBody}</if>
+            <if test="ammount != null">AND `ammount` = #{ammount}</if>
+            <if test="timeLimit != null">AND `time_limit` = #{timeLimit}</if>
+            <if test="measure != null">AND `measure` = #{measure}</if>
+            <if test="define != null">AND `define` = #{define}</if>
+            <if test="summary != null">AND `summary` = #{summary}</if>
+            <if test="status != null">AND `status` = #{status}</if>
+            <if test="createTime != null">AND `create_time` = #{createTime}</if>
+            <if test="updateTime != null">AND `update_time` = #{updateTime}</if>
+            <if test="maxParameter != null">AND ${maxParameter} &lt;= #{maxValue}</if>
+            <if test="minParameter != null">AND ${minParameter} &gt; #{minValue}</if>
+        </trim>
+        <trim prefix="ORDER BY" prefixOverrides="," suffixOverrides=",">
+            <if test="sequence1 != null">${sequence1} ${sequence1Type},</if>
+            <if test="sequence2 != null">${sequence2} ${sequence2Type}</if>
+        </trim>
+        <trim prefix="LIMIT">
+            <if test="skipNum != null and pageNum != null">${skipNum},${pageNum}</if>
+        </trim>
+    </select>
+    <select id="getUniqueBy" parameterType="com.rongrong.model.ProjectTb" resultMap="projectTbResultMap">
+        select * from `project_tb`
+        <trim prefix="where" prefixOverrides="AND|OR">
+            <if test="id != null">AND `id` = #{id}</if>
+            <if test="userId != null">AND `user_id` = #{userId}</if>
+            <if test="title != null">AND `title` = #{title}</if>
+            <if test="acceptCost != null">AND `accept_cost` = #{acceptCost}</if>
+            <if test="mainBody != null">AND `main_body` = #{mainBody}</if>
+            <if test="ammount != null">AND `ammount` = #{ammount}</if>
+            <if test="timeLimit != null">AND `time_limit` = #{timeLimit}</if>
+            <if test="measure != null">AND `measure` = #{measure}</if>
+            <if test="define != null">AND `define` = #{define}</if>
+            <if test="summary != null">AND `summary` = #{summary}</if>
+            <if test="status != null">AND `status` = #{status}</if>
+            <if test="createTime != null">AND `create_time` = #{createTime}</if>
+            <if test="updateTime != null">AND `update_time` = #{updateTime}</if>
+        </trim>
+    </select>
+
+    <select id="getUserIdUniqueBy" parameterType="com.rongrong.model.ProjectTb" resultMap="projectTbResultMap">
+        select user_id from `project_tb`
+        <trim prefix="where" prefixOverrides="AND|OR">
+            <if test="id != null">AND `id` = #{id}</if>
+            <if test="userId != null">AND `user_id` = #{userId}</if>
+            <if test="title != null">AND `title` = #{title}</if>
+            <if test="acceptCost != null">AND `accept_cost` = #{acceptCost}</if>
+            <if test="mainBody != null">AND `main_body` = #{mainBody}</if>
+            <if test="ammount != null">AND `ammount` = #{ammount}</if>
+            <if test="timeLimit != null">AND `time_limit` = #{timeLimit}</if>
+            <if test="measure != null">AND `measure` = #{measure}</if>
+            <if test="define != null">AND `define` = #{define}</if>
+            <if test="summary != null">AND `summary` = #{summary}</if>
+            <if test="status != null">AND `status` = #{status}</if>
+            <if test="createTime != null">AND `create_time` = #{createTime}</if>
+            <if test="updateTime != null">AND `update_time` = #{updateTime}</if>
+        </trim>
+    </select>
+
+
+    <select id="count" parameterType="com.rongrong.model.ProjectTb" resultType="java.lang.Integer">
+        select count(*) from `project_tb`
+        <trim prefix="where" prefixOverrides="AND|OR">
+            <if test="userId != null">AND `user_id` = #{userId}</if>
+            <if test="title != null">AND `title` = #{title}</if>
+            <if test="acceptCost != null">AND `accept_cost` = #{acceptCost}</if>
+            <if test="mainBody != null">AND `main_body` = #{mainBody}</if>
+            <if test="ammount != null">AND `ammount` = #{ammount}</if>
+            <if test="timeLimit != null">AND `time_limit` = #{timeLimit}</if>
+            <if test="measure != null">AND `measure` = #{measure}</if>
+            <if test="define != null">AND `define` = #{define}</if>
+            <if test="summary != null">AND `summary` = #{summary}</if>
+            <if test="status != null">AND `status` = #{status}</if>
+            <if test="createTime != null">AND `create_time` = #{createTime}</if>
+            <if test="updateTime != null">AND `update_time` = #{updateTime}</if>
+        </trim>
+    </select>
+    <select id="personalRelateProjectList" parameterType="com.rongrong.model.UserTb" resultMap="projectTbResultMap">
+        select * from project_tb where id in (
+	      SELECT project_id from pr_comment_tb where user_id = #{id}  GROUP BY project_id
+        )
+        order by id desc
+    </select>
+
+
+</mapper>
