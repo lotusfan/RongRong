@@ -50,7 +50,7 @@
 
      <aop:config>
             <aop:pointcut id="pc" expression="execution(public * com.rongrong.dao.transactionmanager.*.*(..))" /> <!--把事务控制在Service层-->
-            <!--<aop:advisor pointcut-ref="pc" advice-ref="userTxAdvice" />-->
+            <aop:advisor pointcut-ref="pc" advice-ref="userTxAdvice" />
      </aop:config>
 
     <bean id="mapperScannerConfigurer" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
