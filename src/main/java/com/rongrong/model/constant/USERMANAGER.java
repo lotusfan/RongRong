@@ -10,14 +10,14 @@ public enum USERMANAGER {
     SUCCESS("1001", ""),
 
     //登录
-    LOGINSUCCESS("1001", ""),
-    LOGINFAIL("1002", ""),
+    LOGINSUCCESS("1001", "登录成功"),
+    LOGINFAIL("1002", "登录失败"),
 
     //注册
-    REGISTERSUCCESS("1001", ""),
-    USERNAMEREPEAT("1004", ""),
-    USERNAMEILLEGAL("1005", ""),
-    PASSWORDILLEGAL("1006", ""),
+    REGISTERSUCCESS("1001", "注册成功"),
+    USERNAMEREPEAT("1004", "用户名重复"),
+    USERNAMEILLEGAL("1005", "用户名不合法"),
+    PASSWORDILLEGAL("1006", "密码不合法"),
     VALIDATECODEINVALID("1006", ""),
 
     //修改完善信息

@@ -4,10 +4,7 @@ import com.rongrong.model.MessageTb;
 import com.rongrong.model.UserTb;
 import com.rongrong.model.constant.HTTPCODE;
 import com.rongrong.model.constant.USERMANAGER;
-import com.rongrong.model.requestview.AlertPasswordView;
-import com.rongrong.model.requestview.CardView;
-import com.rongrong.model.requestview.RequestModel;
-import com.rongrong.model.requestview.ResponseModel;
+import com.rongrong.model.requestview.*;
 import com.rongrong.service.UserManagerService;
 import com.rongrong.util.ValidateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,9 +52,13 @@ public class UserManagerAction extends ActionParent {
             }
 
             //Service验证
-            USERMANAGER e = userManagerService.userLogin(user);
+            LoginReturnView loginReturnView = userManagerService.userLogin(user);
 
-            return generateResponseModel(HTTPCODE.HTTPSUCCESS.getCode(), e.getCode(), null, null);//返回结构化对象
+            if (loginReturnView == null) {
+                return generateResponseModel(HTTPCODE.HTTPSUCCESS.getCode(), USERMANAGER.LOGINFAIL.getCode(), null, null);
+            }
+
+            return generateResponseModel(HTTPCODE.HTTPSUCCESS.getCode(), USERMANAGER.LOGINSUCCESS.getCode(), null, loginReturnView);//返回结构化对象
 
         } catch (Exception e) {
             return generateResponseModel(HTTPCODE.HTTPSUCCESS.getCode(), USERMANAGER.SERVICEERROR.getCode(), null, null);//返回结构化对象

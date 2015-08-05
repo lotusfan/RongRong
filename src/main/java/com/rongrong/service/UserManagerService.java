@@ -14,6 +14,7 @@ import com.rongrong.model.constant.PICTURE;
 import com.rongrong.model.constant.USERMANAGER;
 import com.rongrong.model.requestview.AlertPasswordView;
 import com.rongrong.model.requestview.CardView;
+import com.rongrong.model.requestview.LoginReturnView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -41,14 +42,37 @@ public class UserManagerService {
      * @param user
      * @return
      */
-    public USERMANAGER userLogin(UserTb user) {
+    public LoginReturnView userLogin(UserTb user) {
 
-        int count = userTbTransactionManager.count(user);
+        try {
 
-        if (count == 1) {
-            return USERMANAGER.LOGINSUCCESS;
+            user = userTbTransactionManager.getUniqueBy(user);
+
+            if (user == null) return null; //登录失败
+
+            LoginReturnView loginReturnView = new LoginReturnView();
+
+            user.setLoginPs(""); //清空登录密码
+            //获取新动态
+            MessageTb message = new MessageTb();
+            message.setToUserId(user.getId());
+            message.setStatus(MESSAGE.INITIALIZTIONSTATUS.getCode());
+            loginReturnView.setMyselfProjectNum(messageTbTransactionManager.count(message));
+
+            //获取收到的名片数
+            message.setType(MESSAGE.CARD.getCode());
+            loginReturnView.setMyselfReceiveCard(messageTbTransactionManager.count(message));
+
+            //获取发送的名片数
+            message.setToUserId(null);
+            message.setFromUserId(user.getId());
+            loginReturnView.setMyselfSendCard(messageTbTransactionManager.count(message));
+
+            return loginReturnView;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
         }
-        return USERMANAGER.LOGINFAIL;
 
     }
 
