@@ -1,3 +1,4 @@
+/*
 package com.rongrong.config;
 
 import org.springframework.context.annotation.Bean;
@@ -7,9 +8,12 @@ import org.springframework.session.data.redis.config.annotation.web.http.EnableR
 import org.springframework.session.web.http.HeaderHttpSessionStrategy;
 import org.springframework.session.web.http.HttpSessionStrategy;
 
+*/
 /**
  * Created by zhangfan on 2015/7/7.
- */
+ *//*
+
+
 @EnableRedisHttpSession
 public class SessionConfig
 {
@@ -26,3 +30,4 @@ public class SessionConfig
 //        return new HeaderHttpSessionStrategy(); // <4>
 //    }
 }
+*/

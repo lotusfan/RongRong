@@ -35,9 +35,11 @@ public class MessageTbActionDB {
     @RequestMapping(value = "getBy", method = {RequestMethod.POST, RequestMethod.GET})
     @ResponseBody
     public ModelAndView getBym(HttpServletRequest httpServletRequest) {
+        httpServletRequest.getSession().setAttribute("uu","lkasdjlfkjsalkdf");
         List<MessageTb> list = messageTbMapper.getBy(new MessageTb());
-        ModelAndView mav = new ModelAndView("/jspdb/MessageTb.jsp");
+        ModelAndView mav = new ModelAndView("/jspdb/messageTb.jsp");
         mav.addObject("messageTb", list);
+        System.out.println(httpServletRequest.getSession().getAttribute("uu"));
         return mav;
     }
 
