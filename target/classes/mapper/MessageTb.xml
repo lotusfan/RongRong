@@ -21,6 +21,16 @@
         <result column="company_address" property="companyAddress"/>
         <result column="create_time" property="createTime"/>
     </resultMap>
+    <resultMap id="messageBoxResultMap" type="com.rongrong.model.requestview.MessageView">
+        <id column="id" property="messageId"/>
+        <result column="name_real" property="nameReal"/>
+        <result column="relation_id" property="projectId"/>
+        <result column="status" property="status"/>
+        <result column="type" property="type"/>
+        <result column="summary" property="summary"/>
+        <result column="create_time" property="createTime"/>
+    </resultMap>
+
     <insert id="save" parameterType="com.rongrong.model.MessageTb" useGeneratedKeys="true" keyProperty="id">
         insert into `message_tb`(
         <trim suffixOverrides=",">
@@ -54,6 +64,20 @@
         </trim>
         where `id` = #{id}
     </update>
+    <update id="clearMessageBox" parameterType="com.rongrong.model.MessageTb">
+        update `message_tb`
+        <trim prefix="set" suffixOverrides=",">
+            <if test="status != null">`status` = #{status},</if>
+            <if test="relationId != null">`relation_id` = #{relationId},</if>
+            <if test="createTime != null">`create_time` = #{createTime},</if>
+        </trim>
+        <trim prefix="where" prefixOverrides="AND|OR">
+            <if test="fromUserId != null">AND `from_user_id` = #{fromUserId}</if>
+            <if test="toUserId != null">AND `to_user_id` = #{toUserId}</if>
+            <if test="orParameter1 != null">AND (${orParameter1} = #{orValue1}</if>
+            <if test="orParameter2 != null">OR ${orParameter2} = #{orValue2})</if>
+        </trim>
+    </update>
     <select id="getBy" parameterType="com.rongrong.model.MessageTb" resultMap="messageTbResultMap">
         select * from `message_tb`
         <trim prefix="where" prefixOverrides="AND|OR">
@@ -78,6 +102,8 @@
             <if test="createTime != null">AND `create_time` = #{createTime}</if>
             <if test="maxParameter != null">AND ${maxParameter} &lt;= #{maxValue}</if>
             <if test="minParameter != null">AND ${minParameter} &gt; #{minValue}</if>
+            <if test="orParameter1 != null">AND (${orParameter1} = #{orValue1}</if>
+            <if test="orParameter2 != null">OR ${orParameter2} = #{orValue2})</if>
         </trim>
         <trim prefix="ORDER BY" prefixOverrides="," suffixOverrides=",">
             <if test="sequence1 != null">${sequence1} ${sequence1Type},</if>
@@ -87,8 +113,9 @@
             <if test="skipNum != null and pageNum != null">${skipNum},${pageNum}</if>
         </trim>
     </select>
-    <select id="getReceiveCardConditionBy" parameterType="com.rongrong.model.MessageTb" resultMap="messageCardResultMap">
-        select * from `message_tb` as m LEFT JOIN user_tb  as u ON m.from_user_id = u.id
+    <select id="getReceiveCardConditionBy" parameterType="com.rongrong.model.MessageTb"
+            resultMap="messageCardResultMap">
+        select * from `message_tb` as m LEFT JOIN user_tb as u ON m.from_user_id = u.id
         <trim prefix="where" prefixOverrides="AND|OR">
             <if test="id != null">AND `id` = #{id}</if>
             <if test="toUserId != null">AND `to_user_id` = #{toUserId}</if>
@@ -104,8 +131,26 @@
             <if test="skipNum != null and pageNum != null">${skipNum},${pageNum}</if>
         </trim>
     </select>
+    <select id="getMessageBoxConditionBy" parameterType="com.rongrong.model.MessageTb" resultMap="messageBoxResultMap">
+        select m.id, u.name_real, m.relation_id, m.status, m.type, m.create_time, p.summary
+        from `message_tb` as m
+        LEFT JOIN user_tb as u ON m.from_user_id = u.id
+        LEFT JOIN project_tb as p ON m.relation_id = p.id
+        <trim prefix="where" prefixOverrides="AND|OR">
+            <if test="id != null">AND `m.id` = #{id}</if>
+            <if test="toUserId != null">AND `m.to_user_id` = #{toUserId}</if>
+            <if test="type != null">AND `m.type` = #{type}</if>
+            <if test="status != null">AND `m.status` = #{status}</if>
+            <if test="relationId != null">AND `m.relation_id` = #{relationId}</if>
+            <if test="createTime != null">AND `m.create_time` = #{createTime}</if>
+        </trim>
+        ORDER BY m.id desc
+        <trim prefix="LIMIT">
+            <if test="skipNum != null and pageNum != null">${skipNum},${pageNum}</if>
+        </trim>
+    </select>
     <select id="getSendCardConditionBy" parameterType="com.rongrong.model.MessageTb" resultMap="messageCardResultMap">
-        select * from `message_tb` as m LEFT JOIN user_tb  as u ON m.to_user_id = u.id
+        select * from `message_tb` as m LEFT JOIN user_tb as u ON m.to_user_id = u.id
         <trim prefix="where" prefixOverrides="AND|OR">
             <if test="id != null">AND `id` = #{id}</if>
             <if test="fromUserId != null">AND `from_user_id` = #{fromUserId}</if>
@@ -121,7 +166,6 @@
             <if test="skipNum != null and pageNum != null">${skipNum},${pageNum}</if>
         </trim>
     </select>
-
 
 
     <select id="getUniqueBy" parameterType="com.rongrong.model.MessageTb" resultMap="messageTbResultMap">

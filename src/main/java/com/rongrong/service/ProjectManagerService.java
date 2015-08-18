@@ -223,17 +223,17 @@ public class ProjectManagerService {
 
             //获取评论  组织条件
             PrCommentTb prComment = new PrCommentTb();
-            prComment.setSequence1("id");
+            prComment.setSequence1("p.id");
             prComment.setSequence1Type("desc");
 
             //获取点赞  组织条件
             PrPraiseTb prPraise = new PrPraiseTb();
-            prPraise.setSequence1("id");
+            prPraise.setSequence1("p.id");
             prPraise.setSequence1Type("desc");
 
             //获取扩散 组织条件
             PrShareTb prShare = new PrShareTb();
-            prShare.setSequence1("id");
+            prShare.setSequence1("p.id");
             prShare.setSequence1Type("desc");
 
             //获取图片  组织条件
@@ -244,6 +244,7 @@ public class ProjectManagerService {
             for (ProjectTb tb : projectTbs) {
 
                 ProjectListView projectListView = new ProjectListView();
+                projectListView.setProjectTb(tb);
 
                 //获取评论
                 prComment.setProjectId(tb.getId());

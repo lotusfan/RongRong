@@ -1,6 +1,7 @@
 package com.rongrong.dao;
 import com.rongrong.model.MessageTb;
 import com.rongrong.model.requestview.CardView;
+import com.rongrong.model.requestview.MessageView;
 
 import java.util.List;
 public interface MessageTbMapper{
@@ -15,5 +16,8 @@ public interface MessageTbMapper{
 
     public List<CardView> getSendCardConditionBy(MessageTb messageTb);
 
+	public List<MessageView> getMessageBoxConditionBy(MessageTb messageTb);
+
+	public void clearMessageBox(MessageTb messageTb);
 
 }

@@ -2,167 +2,175 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.rongrong.dao.UserTbMapper">
 
-<resultMap id="userTbResultMap" type="com.rongrong.model.UserTb">
-	<id column="id" property="id"/>
-	<result column="name_real" property="nameReal" />
-	<result column="rr_id" property="rrId" />
-	<result column="sex" property="sex" />
-	<result column="login_name" property="loginName" />
-	<result column="login_ps" property="loginPs" />
-	<result column="job" property="job" />
-	<result column="position" property="position" />
-	<result column="company" property="company" />
-	<result column="company_address" property="companyAddress" />
-	<result column="e_mail" property="eMail" />
-	<result column="qq" property="qq" />
-	<result column="weixin" property="weixin" />
-	<result column="create_time" property="createTime" />
-	<result column="update_time" property="updateTime" /> 
-</resultMap> 
-<insert id="save" parameterType="com.rongrong.model.UserTb" useGeneratedKeys="true" keyProperty="id">
-	insert into `user_tb`(
-	<trim suffixOverrides=",">
-		<if test="nameReal != null">`name_real`,</if>
-		<if test="rrId != null">`rr_id`,</if>
-		<if test="sex != null">`sex`,</if>
-		<if test="loginName != null">`login_name`,</if>
-		<if test="loginPs != null">`login_ps`,</if>
-		<if test="job != null">`job`,</if>
-		<if test="position != null">`position`,</if>
-		<if test="company != null">`company`,</if>
-		<if test="companyAddress != null">`company_address`,</if>
-		<if test="eMail != null">`e_mail`,</if>
-		<if test="qq != null">`qq`,</if>
-		<if test="weixin != null">`weixin`,</if>
-		<if test="createTime != null">`create_time`,</if>
-		<if test="updateTime != null">`update_time`,</if>
-	</trim>
-	)values(
-	<trim suffixOverrides=",">
-		<if test="nameReal != null"> #{nameReal},</if>
-		<if test="rrId != null"> #{rrId},</if>
-		<if test="sex != null"> #{sex},</if>
-		<if test="loginName != null"> #{loginName},</if>
-		<if test="loginPs != null"> #{loginPs},</if>
-		<if test="job != null"> #{job},</if>
-		<if test="position != null"> #{position},</if>
-		<if test="company != null"> #{company},</if>
-		<if test="companyAddress != null"> #{companyAddress},</if>
-		<if test="eMail != null"> #{eMail},</if>
-		<if test="qq != null"> #{qq},</if>
-		<if test="weixin != null"> #{weixin},</if>
-		<if test="createTime != null"> #{createTime},</if>
-		<if test="updateTime != null"> #{updateTime},</if>
-	</trim>
-	)
-</insert>
-<update id="update" parameterType="com.rongrong.model.UserTb">
-	update `user_tb`
-	<trim prefix="set" suffixOverrides=",">
-		<if test="nameReal != null">`name_real` = #{nameReal},</if>
-		<if test="rrId != null">`rr_id` = #{rrId},</if>
-		<if test="sex != null">`sex` = #{sex},</if>
-		<if test="loginName != null">`login_name` = #{loginName},</if>
-		<if test="loginPs != null">`login_ps` = #{loginPs},</if>
-		<if test="job != null">`job` = #{job},</if>
-		<if test="position != null">`position` = #{position},</if>
-		<if test="company != null">`company` = #{company},</if>
-		<if test="companyAddress != null">`company_address` = #{companyAddress},</if>
-		<if test="eMail != null">`e_mail` = #{eMail},</if>
-		<if test="qq != null">`qq` = #{qq},</if>
-		<if test="weixin != null">`weixin` = #{weixin},</if>
-		<if test="createTime != null">`create_time` = #{createTime},</if>
-		<if test="updateTime != null">`update_time` = #{updateTime},</if>
-	</trim>
-	where `id` = #{id}
-</update>
-<select id="getBy" parameterType="com.rongrong.model.UserTb" resultMap="userTbResultMap">
-	select * from `user_tb`
-	<trim prefix="where" prefixOverrides="AND|OR">
-		<if test="id != null">AND `id` = #{id} </if>
-		<if test="nameReal != null">AND `name_real` = #{nameReal} </if>
-		<if test="rrId != null">AND `rr_id` = #{rrId} </if>
-		<if test="sex != null">AND `sex` = #{sex} </if>
-		<if test="loginName != null">AND `login_name` = #{loginName} </if>
-		<if test="loginPs != null">AND `login_ps` = #{loginPs} </if>
-		<if test="job != null">AND `job` = #{job} </if>
-		<if test="position != null">AND `position` = #{position} </if>
-		<if test="company != null">AND `company` = #{company} </if>
-		<if test="companyAddress != null">AND `company_address` = #{companyAddress} </if>
-		<if test="eMail != null">AND `e_mail` = #{eMail} </if>
-		<if test="qq != null">AND `qq` = #{qq} </if>
-		<if test="weixin != null">AND `weixin` = #{weixin} </if>
-		<if test="createTime != null">AND `create_time` = #{createTime} </if>
-		<if test="updateTime != null">AND `update_time` = #{updateTime} </if>
-	</trim>
-</select>
-<select id="getConditionBy" parameterType="com.rongrong.model.UserTb" resultMap="userTbResultMap">
-	select * from `user_tb`
-	<trim prefix="where" prefixOverrides="AND|OR">
-		<if test="id != null">AND `id` = #{id} </if>
-		<if test="nameReal != null">AND `name_real` = #{nameReal} </if>
-		<if test="rrId != null">AND `rr_id` = #{rrId} </if>
-		<if test="sex != null">AND `sex` = #{sex} </if>
-		<if test="loginName != null">AND `login_name` = #{loginName} </if>
-		<if test="loginPs != null">AND `login_ps` = #{loginPs} </if>
-		<if test="job != null">AND `job` = #{job} </if>
-		<if test="position != null">AND `position` = #{position} </if>
-		<if test="company != null">AND `company` = #{company} </if>
-		<if test="companyAddress != null">AND `company_address` = #{companyAddress} </if>
-		<if test="eMail != null">AND `e_mail` = #{eMail} </if>
-		<if test="qq != null">AND `qq` = #{qq} </if>
-		<if test="weixin != null">AND `weixin` = #{weixin} </if>
-		<if test="createTime != null">AND `create_time` = #{createTime} </if>
-		<if test="updateTime != null">AND `update_time` = #{updateTime} </if> 
-		<if test="maxParameter != null">AND ${maxParameter} &lt;= #{maxValue}</if>
-		<if test="minParameter != null"> AND ${minParameter} &gt; #{minValue}</if>
-	</trim>
-	<trim prefix="ORDER BY" prefixOverrides="," suffixOverrides=",">
-		<if test="sequence1 != null">${sequence1} ${sequence1Type},</if>
-		<if test="sequence2 != null">${sequence2} ${sequence2Type}</if>
-	</trim>
-	<trim prefix="LIMIT">
-		<if test="skipNum != null and pageNum != null"> ${skipNum},${pageNum}</if>
-	</trim>
-</select>
-<select id="getUniqueBy" parameterType="com.rongrong.model.UserTb" resultMap="userTbResultMap">
-	select * from `user_tb`
-	<trim prefix="where" prefixOverrides="AND|OR">
-		<if test="id != null">AND `id` = #{id} </if>
-		<if test="nameReal != null">AND `name_real` = #{nameReal} </if>
-		<if test="rrId != null">AND `rr_id` = #{rrId} </if>
-		<if test="sex != null">AND `sex` = #{sex} </if>
-		<if test="loginName != null">AND `login_name` = #{loginName} </if>
-		<if test="loginPs != null">AND `login_ps` = #{loginPs} </if>
-		<if test="job != null">AND `job` = #{job} </if>
-		<if test="position != null">AND `position` = #{position} </if>
-		<if test="company != null">AND `company` = #{company} </if>
-		<if test="companyAddress != null">AND `company_address` = #{companyAddress} </if>
-		<if test="eMail != null">AND `e_mail` = #{eMail} </if>
-		<if test="qq != null">AND `qq` = #{qq} </if>
-		<if test="weixin != null">AND `weixin` = #{weixin} </if>
-		<if test="createTime != null">AND `create_time` = #{createTime} </if>
-		<if test="updateTime != null">AND `update_time` = #{updateTime} </if>
-	</trim>
-</select>
-<select id="count" parameterType="com.rongrong.model.UserTb" resultType="java.lang.Integer">
-	select count(*) from `user_tb`
-	<trim prefix="where" prefixOverrides="AND|OR">
-        <if test="id != null">AND `id` = #{id}</if>
-        <if test="nameReal != null">AND `name_real` = #{nameReal} </if>
-		<if test="rrId != null">AND `rr_id` = #{rrId} </if>
-		<if test="sex != null">AND `sex` = #{sex} </if>
-		<if test="loginName != null">AND `login_name` = #{loginName} </if>
-		<if test="loginPs != null">AND `login_ps` = #{loginPs} </if>
-		<if test="job != null">AND `job` = #{job} </if>
-		<if test="position != null">AND `position` = #{position} </if>
-		<if test="company != null">AND `company` = #{company} </if>
-		<if test="companyAddress != null">AND `company_address` = #{companyAddress} </if>
-		<if test="eMail != null">AND `e_mail` = #{eMail} </if>
-		<if test="qq != null">AND `qq` = #{qq} </if>
-		<if test="weixin != null">AND `weixin` = #{weixin} </if>
-		<if test="createTime != null">AND `create_time` = #{createTime} </if>
-		<if test="updateTime != null">AND `update_time` = #{updateTime} </if>
-	</trim>
-</select>
+    <resultMap id="userTbResultMap" type="com.rongrong.model.UserTb">
+        <id column="id" property="id"/>
+        <result column="name_real" property="nameReal"/>
+        <result column="rr_id" property="rrId"/>
+        <result column="sex" property="sex"/>
+        <result column="login_name" property="loginName"/>
+        <result column="login_ps" property="loginPs"/>
+        <result column="job" property="job"/>
+        <result column="position" property="position"/>
+        <result column="company" property="company"/>
+        <result column="company_address" property="companyAddress"/>
+        <result column="e_mail" property="eMail"/>
+        <result column="qq" property="qq"/>
+        <result column="weixin" property="weixin"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+    </resultMap>
+    <insert id="save" parameterType="com.rongrong.model.UserTb" useGeneratedKeys="true" keyProperty="id">
+        insert into `user_tb`(
+        <trim suffixOverrides=",">
+            <if test="nameReal != null">`name_real`,</if>
+            <if test="rrId != null">`rr_id`,</if>
+            <if test="sex != null">`sex`,</if>
+            <if test="loginName != null">`login_name`,</if>
+            <if test="loginPs != null">`login_ps`,</if>
+            <if test="job != null">`job`,</if>
+            <if test="position != null">`position`,</if>
+            <if test="company != null">`company`,</if>
+            <if test="companyAddress != null">`company_address`,</if>
+            <if test="eMail != null">`e_mail`,</if>
+            <if test="qq != null">`qq`,</if>
+            <if test="weixin != null">`weixin`,</if>
+            <if test="createTime != null">`create_time`,</if>
+            <if test="updateTime != null">`update_time`,</if>
+        </trim>
+        )values(
+        <trim suffixOverrides=",">
+            <if test="nameReal != null">#{nameReal},</if>
+            <if test="rrId != null">#{rrId},</if>
+            <if test="sex != null">#{sex},</if>
+            <if test="loginName != null">#{loginName},</if>
+            <if test="loginPs != null">#{loginPs},</if>
+            <if test="job != null">#{job},</if>
+            <if test="position != null">#{position},</if>
+            <if test="company != null">#{company},</if>
+            <if test="companyAddress != null">#{companyAddress},</if>
+            <if test="eMail != null">#{eMail},</if>
+            <if test="qq != null">#{qq},</if>
+            <if test="weixin != null">#{weixin},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+        </trim>
+        )
+    </insert>
+    <update id="update" parameterType="com.rongrong.model.UserTb">
+        update `user_tb`
+        <trim prefix="set" suffixOverrides=",">
+            <if test="nameReal != null">`name_real` = #{nameReal},</if>
+            <if test="rrId != null">`rr_id` = #{rrId},</if>
+            <if test="sex != null">`sex` = #{sex},</if>
+            <if test="loginName != null">`login_name` = #{loginName},</if>
+            <if test="loginPs != null">`login_ps` = #{loginPs},</if>
+            <if test="job != null">`job` = #{job},</if>
+            <if test="position != null">`position` = #{position},</if>
+            <if test="company != null">`company` = #{company},</if>
+            <if test="companyAddress != null">`company_address` = #{companyAddress},</if>
+            <if test="eMail != null">`e_mail` = #{eMail},</if>
+            <if test="qq != null">`qq` = #{qq},</if>
+            <if test="weixin != null">`weixin` = #{weixin},</if>
+            <if test="createTime != null">`create_time` = #{createTime},</if>
+            <if test="updateTime != null">`update_time` = #{updateTime},</if>
+        </trim>
+        where `id` = #{id}
+    </update>
+    <update id="retrievePassword" parameterType="com.rongrong.model.UserTb">
+        update `user_tb`
+        <trim prefix="set" suffixOverrides=",">
+            <if test="loginPs != null">`login_ps` = #{loginPs},</if>
+        </trim>
+        where
+        <if test="loginName != null">`login_name` = #{loginName}</if>
+    </update>
+    <select id="getBy" parameterType="com.rongrong.model.UserTb" resultMap="userTbResultMap">
+        select * from `user_tb`
+        <trim prefix="where" prefixOverrides="AND|OR">
+            <if test="id != null">AND `id` = #{id}</if>
+            <if test="nameReal != null">AND `name_real` = #{nameReal}</if>
+            <if test="rrId != null">AND `rr_id` = #{rrId}</if>
+            <if test="sex != null">AND `sex` = #{sex}</if>
+            <if test="loginName != null">AND `login_name` = #{loginName}</if>
+            <if test="loginPs != null">AND `login_ps` = #{loginPs}</if>
+            <if test="job != null">AND `job` = #{job}</if>
+            <if test="position != null">AND `position` = #{position}</if>
+            <if test="company != null">AND `company` = #{company}</if>
+            <if test="companyAddress != null">AND `company_address` = #{companyAddress}</if>
+            <if test="eMail != null">AND `e_mail` = #{eMail}</if>
+            <if test="qq != null">AND `qq` = #{qq}</if>
+            <if test="weixin != null">AND `weixin` = #{weixin}</if>
+            <if test="createTime != null">AND `create_time` = #{createTime}</if>
+            <if test="updateTime != null">AND `update_time` = #{updateTime}</if>
+        </trim>
+    </select>
+    <select id="getConditionBy" parameterType="com.rongrong.model.UserTb" resultMap="userTbResultMap">
+        select * from `user_tb`
+        <trim prefix="where" prefixOverrides="AND|OR">
+            <if test="id != null">AND `id` = #{id}</if>
+            <if test="nameReal != null">AND `name_real` = #{nameReal}</if>
+            <if test="rrId != null">AND `rr_id` = #{rrId}</if>
+            <if test="sex != null">AND `sex` = #{sex}</if>
+            <if test="loginName != null">AND `login_name` = #{loginName}</if>
+            <if test="loginPs != null">AND `login_ps` = #{loginPs}</if>
+            <if test="job != null">AND `job` = #{job}</if>
+            <if test="position != null">AND `position` = #{position}</if>
+            <if test="company != null">AND `company` = #{company}</if>
+            <if test="companyAddress != null">AND `company_address` = #{companyAddress}</if>
+            <if test="eMail != null">AND `e_mail` = #{eMail}</if>
+            <if test="qq != null">AND `qq` = #{qq}</if>
+            <if test="weixin != null">AND `weixin` = #{weixin}</if>
+            <if test="createTime != null">AND `create_time` = #{createTime}</if>
+            <if test="updateTime != null">AND `update_time` = #{updateTime}</if>
+            <if test="maxParameter != null">AND ${maxParameter} &lt;= #{maxValue}</if>
+            <if test="minParameter != null">AND ${minParameter} &gt; #{minValue}</if>
+        </trim>
+        <trim prefix="ORDER BY" prefixOverrides="," suffixOverrides=",">
+            <if test="sequence1 != null">${sequence1} ${sequence1Type},</if>
+            <if test="sequence2 != null">${sequence2} ${sequence2Type}</if>
+        </trim>
+        <trim prefix="LIMIT">
+            <if test="skipNum != null and pageNum != null">${skipNum},${pageNum}</if>
+        </trim>
+    </select>
+    <select id="getUniqueBy" parameterType="com.rongrong.model.UserTb" resultMap="userTbResultMap">
+        select * from `user_tb`
+        <trim prefix="where" prefixOverrides="AND|OR">
+            <if test="id != null">AND `id` = #{id}</if>
+            <if test="nameReal != null">AND `name_real` = #{nameReal}</if>
+            <if test="rrId != null">AND `rr_id` = #{rrId}</if>
+            <if test="sex != null">AND `sex` = #{sex}</if>
+            <if test="loginName != null">AND `login_name` = #{loginName}</if>
+            <if test="loginPs != null">AND `login_ps` = #{loginPs}</if>
+            <if test="job != null">AND `job` = #{job}</if>
+            <if test="position != null">AND `position` = #{position}</if>
+            <if test="company != null">AND `company` = #{company}</if>
+            <if test="companyAddress != null">AND `company_address` = #{companyAddress}</if>
+            <if test="eMail != null">AND `e_mail` = #{eMail}</if>
+            <if test="qq != null">AND `qq` = #{qq}</if>
+            <if test="weixin != null">AND `weixin` = #{weixin}</if>
+            <if test="createTime != null">AND `create_time` = #{createTime}</if>
+            <if test="updateTime != null">AND `update_time` = #{updateTime}</if>
+        </trim>
+    </select>
+    <select id="count" parameterType="com.rongrong.model.UserTb" resultType="java.lang.Integer">
+        select count(*) from `user_tb`
+        <trim prefix="where" prefixOverrides="AND|OR">
+            <if test="id != null">AND `id` = #{id}</if>
+            <if test="nameReal != null">AND `name_real` = #{nameReal}</if>
+            <if test="rrId != null">AND `rr_id` = #{rrId}</if>
+            <if test="sex != null">AND `sex` = #{sex}</if>
+            <if test="loginName != null">AND `login_name` = #{loginName}</if>
+            <if test="loginPs != null">AND `login_ps` = #{loginPs}</if>
+            <if test="job != null">AND `job` = #{job}</if>
+            <if test="position != null">AND `position` = #{position}</if>
+            <if test="company != null">AND `company` = #{company}</if>
+            <if test="companyAddress != null">AND `company_address` = #{companyAddress}</if>
+            <if test="eMail != null">AND `e_mail` = #{eMail}</if>
+            <if test="qq != null">AND `qq` = #{qq}</if>
+            <if test="weixin != null">AND `weixin` = #{weixin}</if>
+            <if test="createTime != null">AND `create_time` = #{createTime}</if>
+            <if test="updateTime != null">AND `update_time` = #{updateTime}</if>
+        </trim>
+    </select>
 </mapper>

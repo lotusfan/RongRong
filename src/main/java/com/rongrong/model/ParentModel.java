@@ -12,6 +12,10 @@ public class ParentModel {
     private String maxValue;
     private String minParameter;
     private String minValue;
+    private String orParameter1;
+    private String orValue1;
+    private String orParameter2;
+    private String orValue2;
 
 
     public Integer getCurrentPage() {
@@ -103,11 +107,44 @@ public class ParentModel {
         this.sequence2Type = sequence2Type;
     }
 
+    public String getOrParameter1() {
+        return orParameter1;
+    }
+
+    public void setOrParameter1(String orParameter1) {
+        this.orParameter1 = orParameter1;
+    }
+
+    public String getOrValue1() {
+        return orValue1;
+    }
+
+    public void setOrValue1(String orValue1) {
+        this.orValue1 = orValue1;
+    }
+
+    public String getOrParameter2() {
+        return orParameter2;
+    }
+
+    public void setOrParameter2(String orParameter2) {
+        this.orParameter2 = orParameter2;
+    }
+
+    public String getOrValue2() {
+        return orValue2;
+    }
+
+    public void setOrValue2(String orValue2) {
+        this.orValue2 = orValue2;
+    }
+
     @Override
     public String toString() {
         return "ParentModel{" +
                 "skipNum=" + skipNum +
                 ", pageNum=" + pageNum +
+                ", currentPage=" + currentPage +
                 ", sequence1='" + sequence1 + '\'' +
                 ", sequence1Type='" + sequence1Type + '\'' +
                 ", sequence2='" + sequence2 + '\'' +
@@ -116,6 +153,10 @@ public class ParentModel {
                 ", maxValue='" + maxValue + '\'' +
                 ", minParameter='" + minParameter + '\'' +
                 ", minValue='" + minValue + '\'' +
+                ", orParameter1='" + orParameter1 + '\'' +
+                ", orValue1='" + orValue1 + '\'' +
+                ", orParameter2='" + orParameter2 + '\'' +
+                ", orValue2='" + orValue2 + '\'' +
                 '}';
     }
 }

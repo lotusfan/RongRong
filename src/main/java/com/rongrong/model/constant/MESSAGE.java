@@ -12,9 +12,12 @@ public enum MESSAGE {
     CARD(3, "名片"),
 
     //状态
-    LOSEEFFECTIVENESSSTATUS(2, "失效"),
-    INITIALIZTIONSTATUS(1, "初始"),
+    LOSEEFFECTIVENESSSTATUS(3, "失效"),
+    INITIALIZTIONSTATUS(1, "初始未读"),
+    HAVEREADEDSTATUS(2, "已读"),
+
     ;
+
 
 
     private Integer code;

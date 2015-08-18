@@ -200,7 +200,7 @@ public class ProjectManagerAction extends ActionParent {
             UserTb user= (UserTb) transformJSONObjectToModel(requestModel, UserTb.class);
 
             //验证信息
-            if (ValidateUtil.userIdValidate(user.getId())) {
+            if (!ValidateUtil.userIdValidate(user.getId())) {
                 return generateResponseModel(HTTPCODE.HTTPSUCCESS.getCode(), USERMANAGER.NOTEXISTUSER.getCode(), null, null);//返回结构化对象\
             }
 
@@ -228,10 +228,10 @@ public class ProjectManagerAction extends ActionParent {
     @ResponseBody
     public ResponseModel projectList(@RequestBody RequestModel requestModel) {
         try {
-            ProjectTb project = (ProjectTb) transformJSONObjectToModel(requestModel, PrCommentTb.class);
+            ProjectTb project = (ProjectTb) transformJSONObjectToModel(requestModel, ProjectTb.class);
 
             //验证信息
-            if (ValidateUtil.figureValidate(project.getCurrentPage())) {
+            if (!ValidateUtil.figureValidate(project.getCurrentPage())) {
                 return generateResponseModel(HTTPCODE.HTTPSUCCESS.getCode(), PROJECTMANAGER.NOTEXISTCURRENTPAGE.getCode(), null, null);//返回结构化对象\
             }
 
@@ -288,8 +288,8 @@ public class ProjectManagerAction extends ActionParent {
             ProjectTb project = (ProjectTb) transformJSONObjectToModel(requestModel, ProjectTb.class);
 
             //验证信息
-            if (ValidateUtil.figureValidate(project.getId())) {
-                return generateResponseModel(HTTPCODE.HTTPSUCCESS.getCode(), PROJECTMANAGER.NOTEXISTCURRENTPAGE.getCode(), null, null);//返回结构化对象\
+            if (!ValidateUtil.figureValidate(project.getId())) {
+                return generateResponseModel(HTTPCODE.HTTPSUCCESS.getCode(), PROJECTMANAGER.PROJECTEMPTY.getCode(), null, null);//返回结构化对象\
             }
 
             //Service delete

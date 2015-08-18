@@ -3,6 +3,7 @@ package com.rongrong.action;
 import com.rongrong.model.MessageTb;
 import com.rongrong.model.UserTb;
 import com.rongrong.model.constant.HTTPCODE;
+import com.rongrong.model.constant.MESSAGE;
 import com.rongrong.model.constant.USERMANAGER;
 import com.rongrong.model.requestview.*;
 import com.rongrong.service.UserManagerService;
@@ -90,9 +91,13 @@ public class UserManagerAction extends ActionParent {
                 return generateResponseModel(HTTPCODE.HTTPSUCCESS.getCode(), USERMANAGER.PASSWORDILLEGAL.getCode(), null, null);//返回结构化对象
             }
             //Service 插入
-            USERMANAGER e = userManagerService.userRegister(user);
+            user = userManagerService.userRegister(user);
 
-            return generateResponseModel(HTTPCODE.HTTPSUCCESS.getCode(), e.getCode(), null, null);//返回结构化对象
+            if (user == null) {
+                return generateResponseModel(HTTPCODE.HTTPSUCCESS.getCode(), USERMANAGER.SERVICEERROR.getCode(), null, null);
+            }
+
+            return generateResponseModel(HTTPCODE.HTTPSUCCESS.getCode(), USERMANAGER.REGISTERSUCCESS.getCode(), null, user);//返回结构化对象
 
         } catch (Exception e) {
             return generateResponseModel(HTTPCODE.HTTPSUCCESS.getCode(), USERMANAGER.SERVICEERROR.getCode(), null, null);
@@ -118,9 +123,13 @@ public class UserManagerAction extends ActionParent {
             //验证信息格式
 
             //Service 更新
-            USERMANAGER e = userManagerService.userAlertInfo(user);
+            user = userManagerService.userAlertInfo(user);
 
-            return generateResponseModel(HTTPCODE.HTTPSUCCESS.getCode(), e.getCode(), null, null);//返回结构化对象
+            if (user == null) {
+                return generateResponseModel(HTTPCODE.HTTPSUCCESS.getCode(), USERMANAGER.SERVICEERROR.getCode(), null, null);
+            }
+
+            return generateResponseModel(HTTPCODE.HTTPSUCCESS.getCode(), USERMANAGER.ALERTSUCCESS.getCode(), null, user);//返回结构化对象
 
         } catch (Exception e) {
             return generateResponseModel(HTTPCODE.HTTPSUCCESS.getCode(), USERMANAGER.SERVICEERROR.getCode(), null, null);
@@ -145,16 +154,15 @@ public class UserManagerAction extends ActionParent {
             UserTb user = (UserTb) transformJSONObjectToModel(requestModel, UserTb.class);//将requestModel里的o强转为user对象
 
             //验证信息格式
-            if (!ValidateUtil.userIdValidate(user.getId())) { //用户Id校验
-                return generateResponseModel(HTTPCODE.HTTPSUCCESS.getCode(), USERMANAGER.PASSWORDILLEGAL.getCode(), null, null);//返回结构化对象
+            if (!ValidateUtil.loginNameValidate(user.getLoginName())) {
+                return generateResponseModel(HTTPCODE.HTTPSUCCESS.getCode(), USERMANAGER.USERNAMEILLEGAL.getCode(), null, null);//返回结构化对象
             }
-
-            if (!ValidateUtil.loginPwValidate(user.getLoginPs())) { //密码校验
+            if (!ValidateUtil.loginPwValidate(user.getLoginPs())) {
                 return generateResponseModel(HTTPCODE.HTTPSUCCESS.getCode(), USERMANAGER.PASSWORDILLEGAL.getCode(), null, null);//返回结构化对象
             }
 
             //Service 更新
-            USERMANAGER e = userManagerService.userAlertInfo(user);
+            USERMANAGER e = userManagerService.retrievePassword(user);
 
             return generateResponseModel(HTTPCODE.HTTPSUCCESS.getCode(), e.getCode(), null, null);//返回结构化对象
 
@@ -227,6 +235,8 @@ public class UserManagerAction extends ActionParent {
      * @param requestModel
      * @return
      */
+    @RequestMapping(value = "perInfo", method = RequestMethod.POST)
+    @ResponseBody
     public ResponseModel personalInfo(@RequestBody RequestModel requestModel) {
 
         try {
@@ -251,6 +261,92 @@ public class UserManagerAction extends ActionParent {
     }
 
     /**
+     * 用户获取已读消息列表(有分页)
+     *
+     * @param requestModel
+     * @return
+     */
+    @RequestMapping(value = "gethr", method = RequestMethod.POST)
+    @ResponseBody
+    public ResponseModel getHaveReadedMessageBoxListView(@RequestBody RequestModel requestModel) {
+        try {
+            UserTb user = (UserTb) transformJSONObjectToModel(requestModel, UserTb.class);
+
+            //验证信息
+
+
+            //Service get
+            List<MessageView> list = userManagerService.getMessageBoxListView(user, MESSAGE.HAVEREADEDSTATUS.getCode());
+
+            if (list == null) {
+                return generateResponseModel(HTTPCODE.HTTPSUCCESS.getCode(), USERMANAGER.SERVICEERROR.getCode(), null, null);
+            }
+
+            return generateResponseModel(HTTPCODE.HTTPSUCCESS.getCode(), USERMANAGER.SUCCESS.getCode(), null, list);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return generateResponseModel(HTTPCODE.HTTPSUCCESS.getCode(), USERMANAGER.SERVICEERROR.getCode(), null, null);
+        }
+    }
+
+    /**
+     * 用户获取未读消息列表(有分页)
+     *
+     * @param requestModel
+     * @return
+     */
+    @RequestMapping(value = "getnr", method = RequestMethod.POST)
+    @ResponseBody
+    public ResponseModel getNotReadedMessageBoxListView(@RequestBody RequestModel requestModel) {
+        try {
+            UserTb user = (UserTb) transformJSONObjectToModel(requestModel, UserTb.class);
+
+            //验证信息
+
+
+            //Service get
+            List<MessageView> list = userManagerService.getMessageBoxListView(user, MESSAGE.INITIALIZTIONSTATUS.getCode());
+
+            if (list == null) {
+                return generateResponseModel(HTTPCODE.HTTPSUCCESS.getCode(), USERMANAGER.SERVICEERROR.getCode(), null, null);
+            }
+
+            return generateResponseModel(HTTPCODE.HTTPSUCCESS.getCode(), USERMANAGER.SUCCESS.getCode(), null, list);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return generateResponseModel(HTTPCODE.HTTPSUCCESS.getCode(), USERMANAGER.SERVICEERROR.getCode(), null, null);
+        }
+    }
+
+
+    /**
+     * 用户清空消息盒子,包括已读,未读消息
+     *
+     * @param requestModel
+     * @return
+     */
+    @RequestMapping(value = "clearm", method = RequestMethod.POST)
+    @ResponseBody
+    public ResponseModel clearMessageBox(@RequestBody RequestModel requestModel) {
+        try {
+
+            UserTb user = (UserTb) transformJSONObjectToModel(requestModel, UserTb.class);
+
+            //验证信息
+            if (!ValidateUtil.userIdValidate(user.getId())) {
+                return generateResponseModel(HTTPCODE.HTTPSUCCESS.getCode(), USERMANAGER.PASSWORDILLEGAL.getCode(), null, null);//返回结构化对象
+            }
+            //Service clear
+            USERMANAGER e = userManagerService.clearMessageBox(user);
+
+            return generateResponseModel(HTTPCODE.HTTPSUCCESS.getCode(), e.getCode(), null, null);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return generateResponseModel(HTTPCODE.HTTPSUCCESS.getCode(), USERMANAGER.SERVICEERROR.getCode(), null, null);
+        }
+    }
+
+    /**
      * 删除消息
      *
      * @param requestModel
@@ -264,7 +360,7 @@ public class UserManagerAction extends ActionParent {
             MessageTb message = (MessageTb) transformJSONObjectToModel(requestModel, MessageTb.class);
 
             //验证信息
-            if (ValidateUtil.figureValidate(message.getId())) {
+            if (!ValidateUtil.figureValidate(message.getId())) {
                 return generateResponseModel(HTTPCODE.HTTPSUCCESS.getCode(), USERMANAGER.NOTEXISTMESSAGEID.getCode(), null, null);
             }
 

@@ -33,8 +33,8 @@
             <bean class="com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter">
                 <property name="features">
                     <array>
-                        <value>WriteMapNullValue</value>
-                        <value>WriteNullStringAsEmpty</value>
+                        <!--<value>WriteMapNullValue</value>-->
+                        <!--<value>WriteNullStringAsEmpty</value>-->
                         <value>WriteEnumUsingToString</value>
                         <value>DisableCircularReferenceDetect</value>
                     </array>
