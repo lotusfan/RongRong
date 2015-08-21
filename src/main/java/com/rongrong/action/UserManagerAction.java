@@ -1,5 +1,6 @@
 package com.rongrong.action;
 
+import com.jcabi.aspects.Loggable;
 import com.rongrong.model.MessageTb;
 import com.rongrong.model.UserTb;
 import com.rongrong.model.constant.HTTPCODE;
@@ -25,6 +26,7 @@ import java.util.List;
  */
 @Controller
 @RequestMapping(value = "/user")
+@Loggable(trim = false)
 public class UserManagerAction extends ActionParent {
 
     @Autowired

@@ -1,5 +1,6 @@
 package com.rongrong.service;
 
+import com.jcabi.aspects.Loggable;
 import com.rongrong.dao.transactionmanager.*;
 import com.rongrong.model.*;
 import com.rongrong.model.constant.*;
@@ -17,6 +18,7 @@ import java.util.List;
  */
 
 @Service
+@Loggable(trim = false)
 public class ProjectManagerService {
 
     @Autowired

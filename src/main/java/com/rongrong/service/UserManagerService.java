@@ -1,5 +1,6 @@
 package com.rongrong.service;
 
+import com.jcabi.aspects.Loggable;
 import com.rongrong.dao.transactionmanager.*;
 import com.rongrong.model.*;
 import com.rongrong.model.constant.MESSAGE;
@@ -23,6 +24,7 @@ import java.util.List;
  * 用户信息管理  登录，注册，用户信息修改， 密码修改
  */
 @Service
+@Loggable(trim = false)
 public class UserManagerService {
 
     @Autowired
