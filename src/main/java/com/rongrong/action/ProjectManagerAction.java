@@ -174,7 +174,7 @@ public class ProjectManagerAction extends ActionParent {
             //验证信息
 
             //Service select
-            List<ProjectTb> list = projectManagerService.personalProjectList(project);
+            List<ProjectListView> list = projectManagerService.personalProjectList(project);
 
             if (list == null) {
                 return generateResponseModel(HTTPCODE.HTTPSUCCESS.getCode(), PROJECTMANAGER.PROJECTEMPTY.getCode(), null, null);//返回结构化对象
@@ -205,7 +205,7 @@ public class ProjectManagerAction extends ActionParent {
             }
 
             //Service select
-            List<ProjectTb> list = projectManagerService.personalRelateProjectList(user);
+            List<ProjectListView> list = projectManagerService.personalRelateProjectList(user);
 
             if (list == null) {
                 return generateResponseModel(HTTPCODE.HTTPSUCCESS.getCode(), PROJECTMANAGER.PROJECTEMPTY.getCode(), null, null);//返回结构化对象

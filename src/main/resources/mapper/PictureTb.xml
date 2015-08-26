@@ -41,7 +41,7 @@
 	where `id` = #{id}
 </update>
 <select id="getBy" parameterType="com.rongrong.model.PictureTb" resultMap="pictureTbResultMap">
-	select * from `picture_tb`
+	select id, url from `picture_tb`
 	<trim prefix="where" prefixOverrides="AND|OR">
 		<if test="id != null">AND `id` = #{id} </if>
 		<if test="type != null">AND `type` = #{type} </if>
