@@ -1,5 +1,6 @@
 package com.rongrong.action.dbaction;
 
+import com.jcabi.aspects.Loggable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,6 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 
 @Controller
 @RequestMapping(value = "/db/messageTb")
+@Loggable(trim = false)
 public class MessageTbActionDB {
 	@Autowired
 	private MessageTbMapper messageTbMapper;

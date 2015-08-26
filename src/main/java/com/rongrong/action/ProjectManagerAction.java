@@ -1,5 +1,6 @@
 package com.rongrong.action;
 
+import com.jcabi.aspects.Loggable;
 import com.rongrong.model.*;
 import com.rongrong.model.constant.HTTPCODE;
 import com.rongrong.model.constant.PROJECTMANAGER;
@@ -26,6 +27,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping(value = "/product")
+@Loggable(trim = false)
 public class ProjectManagerAction extends ActionParent {
 
     @Autowired
