@@ -6,6 +6,10 @@ package com.rongrong.model.constant;
 public enum PROJECT {
     PUBLIST(1, "发布"),
     CANCEL(2, "取消"),
+
+    //发布类型
+    DEFINE(1, "自己定义"),
+    TEMPLATE(2, "模板"),
     ;
 
     private int code;

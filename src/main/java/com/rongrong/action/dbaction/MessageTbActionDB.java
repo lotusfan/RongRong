@@ -1,5 +1,6 @@
 package com.rongrong.action.dbaction;
 
+import com.jcabi.aspects.Loggable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,6 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 
 @Controller
 @RequestMapping(value = "/db/messageTb")
+@Loggable(trim = false)
 public class MessageTbActionDB {
 	@Autowired
 	private MessageTbMapper messageTbMapper;
@@ -35,9 +37,11 @@ public class MessageTbActionDB {
     @RequestMapping(value = "getBy", method = {RequestMethod.POST, RequestMethod.GET})
     @ResponseBody
     public ModelAndView getBym(HttpServletRequest httpServletRequest) {
+        httpServletRequest.getSession().setAttribute("uu","lkasdjlfkjsalkdf");
         List<MessageTb> list = messageTbMapper.getBy(new MessageTb());
-        ModelAndView mav = new ModelAndView("/jspdb/MessageTb.jsp");
+        ModelAndView mav = new ModelAndView("/jspdb/messageTb.jsp");
         mav.addObject("messageTb", list);
+        System.out.println(httpServletRequest.getSession().getAttribute("uu"));
         return mav;
     }
 

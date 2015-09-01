@@ -5,8 +5,8 @@ package com.rongrong.model.constant;
  */
 public enum PROJECTMANAGER {
 
-    SERVICEERROR("1000", ""),
-    SUCCESS("2001", ""),
+    SERVICEERROR("1000", "服务器出错"),
+    SUCCESS("1200", ""),
 
     PROJECTADDSUCCESS("2001", "项目添加成功"),
     PROJECTEMPTY("2002", "项目为空"),

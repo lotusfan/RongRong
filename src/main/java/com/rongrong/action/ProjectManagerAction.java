@@ -1,5 +1,6 @@
 package com.rongrong.action;
 
+import com.jcabi.aspects.Loggable;
 import com.rongrong.model.*;
 import com.rongrong.model.constant.HTTPCODE;
 import com.rongrong.model.constant.PROJECTMANAGER;
@@ -26,6 +27,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping(value = "/product")
+@Loggable(trim = false)
 public class ProjectManagerAction extends ActionParent {
 
     @Autowired
@@ -174,7 +176,7 @@ public class ProjectManagerAction extends ActionParent {
             //验证信息
 
             //Service select
-            List<ProjectTb> list = projectManagerService.personalProjectList(project);
+            List<ProjectListView> list = projectManagerService.personalProjectList(project);
 
             if (list == null) {
                 return generateResponseModel(HTTPCODE.HTTPSUCCESS.getCode(), PROJECTMANAGER.PROJECTEMPTY.getCode(), null, null);//返回结构化对象
@@ -200,12 +202,12 @@ public class ProjectManagerAction extends ActionParent {
             UserTb user= (UserTb) transformJSONObjectToModel(requestModel, UserTb.class);
 
             //验证信息
-            if (ValidateUtil.userIdValidate(user.getId())) {
+            if (!ValidateUtil.userIdValidate(user.getId())) {
                 return generateResponseModel(HTTPCODE.HTTPSUCCESS.getCode(), USERMANAGER.NOTEXISTUSER.getCode(), null, null);//返回结构化对象\
             }
 
             //Service select
-            List<ProjectTb> list = projectManagerService.personalRelateProjectList(user);
+            List<ProjectListView> list = projectManagerService.personalRelateProjectList(user);
 
             if (list == null) {
                 return generateResponseModel(HTTPCODE.HTTPSUCCESS.getCode(), PROJECTMANAGER.PROJECTEMPTY.getCode(), null, null);//返回结构化对象
@@ -228,10 +230,10 @@ public class ProjectManagerAction extends ActionParent {
     @ResponseBody
     public ResponseModel projectList(@RequestBody RequestModel requestModel) {
         try {
-            ProjectTb project = (ProjectTb) transformJSONObjectToModel(requestModel, PrCommentTb.class);
+            ProjectTb project = (ProjectTb) transformJSONObjectToModel(requestModel, ProjectTb.class);
 
             //验证信息
-            if (ValidateUtil.figureValidate(project.getCurrentPage())) {
+            if (!ValidateUtil.figureValidate(project.getCurrentPage())) {
                 return generateResponseModel(HTTPCODE.HTTPSUCCESS.getCode(), PROJECTMANAGER.NOTEXISTCURRENTPAGE.getCode(), null, null);//返回结构化对象\
             }
 
@@ -288,8 +290,8 @@ public class ProjectManagerAction extends ActionParent {
             ProjectTb project = (ProjectTb) transformJSONObjectToModel(requestModel, ProjectTb.class);
 
             //验证信息
-            if (ValidateUtil.figureValidate(project.getId())) {
-                return generateResponseModel(HTTPCODE.HTTPSUCCESS.getCode(), PROJECTMANAGER.NOTEXISTCURRENTPAGE.getCode(), null, null);//返回结构化对象\
+            if (!ValidateUtil.figureValidate(project.getId())) {
+                return generateResponseModel(HTTPCODE.HTTPSUCCESS.getCode(), PROJECTMANAGER.PROJECTEMPTY.getCode(), null, null);//返回结构化对象\
             }
 
             //Service delete

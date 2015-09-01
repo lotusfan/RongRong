@@ -60,4 +60,7 @@ public class UserTbTransactionManager {
         return userTbMapper.count(userTb);
     }
 
+    public void retrievePassword(UserTb userTb) {
+        userTbMapper.retrievePassword(userTb);
+    }
 }

@@ -1,6 +1,7 @@
 package com.rongrong.action;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.rongrong.model.requestview.RequestModel;
 import com.rongrong.model.requestview.ResponseModel;
 
@@ -56,7 +57,7 @@ public class ActionParent {
      * @return
      */
     public Object transformJSONObjectToModel(RequestModel requestModel, Class cl) {
-        return JSON.toJavaObject((JSON)requestModel.getO(), cl);
+        return JSON.toJavaObject((JSONObject)requestModel.getO(), cl);
     }
 
 

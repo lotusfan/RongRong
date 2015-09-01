@@ -1,15 +1,20 @@
+/*
 package com.rongrong.config;
 
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
 import org.springframework.session.data.redis.config.annotation.web.http.EnableRedisHttpSession;
 import org.springframework.session.web.http.HeaderHttpSessionStrategy;
 import org.springframework.session.web.http.HttpSessionStrategy;
 
+*/
 /**
  * Created by zhangfan on 2015/7/7.
- */
-//@EnableRedisHttpSession
+ *//*
+
+
+@EnableRedisHttpSession
 public class SessionConfig
 {
     @Bean
@@ -20,8 +25,9 @@ public class SessionConfig
         return factory;
     }
 
-    @Bean
-    public HttpSessionStrategy httpSessionStrategy() {
-        return new HeaderHttpSessionStrategy(); // <4>
-    }
+//    @Bean
+//    public HttpSessionStrategy httpSessionStrategy() {
+//        return new HeaderHttpSessionStrategy(); // <4>
+//    }
 }
+*/

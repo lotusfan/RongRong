@@ -15,9 +15,10 @@ public class ProjectTb extends ParentModel{
 	private String measure; //
 	private String define; //
 	private String summary; //
-    private int status;
+    private Integer status;
 	private Timestamp createTime; //
 	private Timestamp updateTime; //
+	private Integer type;//
 
     public Integer getId() {
 		return id;
@@ -83,11 +84,11 @@ public class ProjectTb extends ParentModel{
 		this.summary = summary;
 	}
 
-    public int getStatus() {
+    public Integer getStatus() {
         return status;
     }
 
-    public void setStatus(int status) {
+    public void setStatus(Integer status) {
         this.status = status;
     }
 
@@ -104,23 +105,31 @@ public class ProjectTb extends ParentModel{
 		this.updateTime = updateTime;
 	}
 
+	public Integer getType() {
+		return type;
+	}
 
-    @Override
-    public String toString() {
-        return "ProjectTb{" +
-                "id=" + id +
-                ", userId=" + userId +
-                ", title='" + title + '\'' +
-                ", acceptCost=" + acceptCost +
-                ", mainBody='" + mainBody + '\'' +
-                ", ammount=" + ammount +
-                ", timeLimit='" + timeLimit + '\'' +
-                ", measure='" + measure + '\'' +
-                ", define='" + define + '\'' +
-                ", summary='" + summary + '\'' +
-                ", status=" + status +
-                ", createTime=" + createTime +
-                ", updateTime=" + updateTime +
-                '}';
-    }
+	public void setType(Integer type) {
+		this.type = type;
+	}
+
+	@Override
+	public String toString() {
+		return "ProjectTb{" +
+				"id=" + id +
+				", userId=" + userId +
+				", title='" + title + '\'' +
+				", acceptCost=" + acceptCost +
+				", mainBody='" + mainBody + '\'' +
+				", ammount=" + ammount +
+				", timeLimit='" + timeLimit + '\'' +
+				", measure='" + measure + '\'' +
+				", define='" + define + '\'' +
+				", summary='" + summary + '\'' +
+				", status=" + status +
+				", createTime=" + createTime +
+				", updateTime=" + updateTime +
+				", type=" + type +
+				'}';
+	}
 }

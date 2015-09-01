@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.rongrong.dao.LogInfoMapper">
+
+<resultMap id="logInfoResultMap" type="com.rongrong.model.LogInfo">
+	<id column="id" property="id"/>
+	<result column="user_id" property="userId" />
+	<result column="ip" property="ip" />
+	<result column="longitude" property="longitude" />
+	<result column="latitude" property="latitude" />
+	<result column="type" property="type" />
+	<result column="uuid" property="uuid" />
+	<result column="create_time" property="createTime" /> 
+</resultMap> 
+<insert id="save" parameterType="com.rongrong.model.LogInfo" useGeneratedKeys="true" keyProperty="id">
+	insert into `log_info`(
+	<trim suffixOverrides=",">
+		<if test="userId != null">`user_id`,</if>
+		<if test="ip != null">`ip`,</if>
+		<if test="longitude != null">`longitude`,</if>
+		<if test="latitude != null">`latitude`,</if>
+		<if test="type != null">`type`,</if>
+		<if test="uuid != null">`uuid`,</if>
+		<if test="createTime != null">`create_time`,</if>
+	</trim>
+	)values(
+	<trim suffixOverrides=",">
+		<if test="userId != null"> #{userId},</if>
+		<if test="ip != null"> #{ip},</if>
+		<if test="longitude != null"> #{longitude},</if>
+		<if test="latitude != null"> #{latitude},</if>
+		<if test="type != null"> #{type},</if>
+		<if test="uuid != null"> #{uuid},</if>
+		<if test="createTime != null"> #{createTime},</if>
+	</trim>
+	)
+</insert>
+<update id="update" parameterType="com.rongrong.model.LogInfo">
+	update `log_info`
+	<trim prefix="set" suffixOverrides=",">
+		<if test="userId != null">`user_id` = #{userId},</if>
+		<if test="ip != null">`ip` = #{ip},</if>
+		<if test="longitude != null">`longitude` = #{longitude},</if>
+		<if test="latitude != null">`latitude` = #{latitude},</if>
+		<if test="type != null">`type` = #{type},</if>
+		<if test="uuid != null">`uuid` = #{uuid},</if>
+		<if test="createTime != null">`create_time` = #{createTime},</if>
+	</trim>
+	where `id` = #{id}
+</update>
+<select id="getBy" parameterType="com.rongrong.model.LogInfo" resultMap="logInfoResultMap">
+	select * from `log_info`
+	<trim prefix="where" prefixOverrides="AND|OR">
+		<if test="id != null">AND `id` = #{id} </if>
+		<if test="userId != null">AND `user_id` = #{userId} </if>
+		<if test="ip != null">AND `ip` = #{ip} </if>
+		<if test="longitude != null">AND `longitude` = #{longitude} </if>
+		<if test="latitude != null">AND `latitude` = #{latitude} </if>
+		<if test="type != null">AND `type` = #{type} </if>
+		<if test="uuid != null">AND `uuid` = #{uuid} </if>
+		<if test="createTime != null">AND `create_time` = #{createTime} </if>
+	</trim>
+</select>
+<select id="getConditionBy" parameterType="com.rongrong.model.LogInfo" resultMap="logInfoResultMap">
+	select * from `log_info`
+	<trim prefix="where" prefixOverrides="AND|OR">
+		<if test="id != null">AND `id` = #{id} </if>
+		<if test="userId != null">AND `user_id` = #{userId} </if>
+		<if test="ip != null">AND `ip` = #{ip} </if>
+		<if test="longitude != null">AND `longitude` = #{longitude} </if>
+		<if test="latitude != null">AND `latitude` = #{latitude} </if>
+		<if test="type != null">AND `type` = #{type} </if>
+		<if test="uuid != null">AND `uuid` = #{uuid} </if>
+		<if test="createTime != null">AND `create_time` = #{createTime} </if> 
+		<if test="maxParameter != null">AND ${maxParameter} &lt;= #{maxValue}</if>
+		<if test="minParameter != null"> AND ${minParameter} &gt; #{minValue}</if>
+	</trim>
+	<trim prefix="ORDER BY" prefixOverrides="," suffixOverrides=",">
+		<if test="sequence1 != null">${sequence1} ${sequence1Type},</if>
+		<if test="sequence2 != null">${sequence2} ${sequence2Type}</if>
+	</trim>
+	<trim prefix="LIMIT">
+		<if test="skipNum != null and pageNum != null"> ${skipNum},${pageNum}</if>
+	</trim>
+</select>
+<select id="getUniqueBy" parameterType="com.rongrong.model.LogInfo" resultMap="logInfoResultMap">
+	select * from `log_info`
+	<trim prefix="where" prefixOverrides="AND|OR">
+		<if test="id != null">AND `id` = #{id} </if>
+		<if test="userId != null">AND `user_id` = #{userId} </if>
+		<if test="ip != null">AND `ip` = #{ip} </if>
+		<if test="longitude != null">AND `longitude` = #{longitude} </if>
+		<if test="latitude != null">AND `latitude` = #{latitude} </if>
+		<if test="type != null">AND `type` = #{type} </if>
+		<if test="uuid != null">AND `uuid` = #{uuid} </if>
+		<if test="createTime != null">AND `create_time` = #{createTime} </if>
+	</trim>
+</select>
+<select id="count" parameterType="com.rongrong.model.LogInfo" resultType="java.lang.Integer">
+	select count(*) from `log_info`
+	<trim prefix="where" prefixOverrides="AND|OR">
+		<if test="userId != null">AND `user_id` = #{userId} </if>
+		<if test="ip != null">AND `ip` = #{ip} </if>
+		<if test="longitude != null">AND `longitude` = #{longitude} </if>
+		<if test="latitude != null">AND `latitude` = #{latitude} </if>
+		<if test="type != null">AND `type` = #{type} </if>
+		<if test="uuid != null">AND `uuid` = #{uuid} </if>
+		<if test="createTime != null">AND `create_time` = #{createTime} </if>
+	</trim>
+</select>
+</mapper>

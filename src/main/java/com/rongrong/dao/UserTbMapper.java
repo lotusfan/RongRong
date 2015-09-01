@@ -8,4 +8,6 @@ public interface UserTbMapper{
 	public UserTb getUniqueBy(UserTb userTb);
 	public Integer count(UserTb userTb);
 	public List<UserTb> getConditionBy(UserTb userTb);
+
+	public void retrievePassword(UserTb userTb);
 }

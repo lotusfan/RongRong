@@ -129,4 +129,26 @@ public class UserTb extends ParentModel{
 	public void setUpdateTime (Timestamp updateTime) {
 		this.updateTime = updateTime;
 	}
+
+	@Override
+	public String toString() {
+		return "UserTb{" +
+				"id=" + id +
+				", nameReal='" + nameReal + '\'' +
+				", rrId='" + rrId + '\'' +
+				", sex=" + sex +
+				", loginName='" + loginName + '\'' +
+				", loginPs='" + loginPs + '\'' +
+				", job='" + job + '\'' +
+				", position='" + position + '\'' +
+				", company='" + company + '\'' +
+				", companyAddress='" + companyAddress + '\'' +
+				", eMail='" + eMail + '\'' +
+				", qq='" + qq + '\'' +
+				", weixin='" + weixin + '\'' +
+				", createTime=" + createTime +
+				", updateTime=" + updateTime +
+				", projectNum=" + projectNum +
+				'}';
+	}
 }

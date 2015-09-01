@@ -1,5 +1,6 @@
 package com.rongrong.service;
 
+import com.jcabi.aspects.Loggable;
 import com.rongrong.dao.transactionmanager.*;
 import com.rongrong.model.*;
 import com.rongrong.model.constant.*;
@@ -17,6 +18,7 @@ import java.util.List;
  */
 
 @Service
+@Loggable(trim = false)
 public class ProjectManagerService {
 
     @Autowired
@@ -166,19 +168,24 @@ public class ProjectManagerService {
      * @param project
      * @return
      */
-    public List<ProjectTb> personalProjectList(ProjectTb project) {
+    public List<ProjectListView> personalProjectList(ProjectTb project) {
 
-        List<ProjectTb> list = null;
+        List<ProjectListView> projectListViews = null;
         try {
-            project.setSkipNum((project.getCurrentPage()-1) * PAGENUM.num);
+            project.setSkipNum((project.getCurrentPage() - 1) * PAGENUM.num);
             project.setPageNum(PAGENUM.num);
             project.setSequence1("id");
             project.setSequence1Type("desc");
-            list = projectTbTransactionManager.getConditionBy(project);
+            List<ProjectTb> projectTbs = projectTbTransactionManager.getConditionBy(project);
+
+            projectListViews = projectRelationInfo(projectTbs);
+
+            return projectListViews;
+
         } catch (Exception e) {
             e.printStackTrace();
+            return null;
         }
-        return list;
     }
 
     /**
@@ -187,13 +194,15 @@ public class ProjectManagerService {
      * @param user
      * @return
      */
-    public List<ProjectTb> personalRelateProjectList(UserTb user) {
+    public List<ProjectListView> personalRelateProjectList(UserTb user) {
 
-        List<ProjectTb> list = null;
+        List<ProjectListView> projectListViews = null;
         try {
-            list = projectTbTransactionManager.personalRelateProjectList(user);
+            List<ProjectTb> projectTbs = projectTbTransactionManager.personalRelateProjectList(user);
 
-            return list;
+            projectListViews = projectRelationInfo(projectTbs);
+
+            return projectListViews;
         } catch (Exception e) {
             e.printStackTrace();
             return null;
@@ -208,7 +217,7 @@ public class ProjectManagerService {
      */
     public List<ProjectListView> projectList(ProjectTb project) {
 
-        List<ProjectListView> projectListViews = new ArrayList<>();
+        List<ProjectListView> projectListViews = null;
         try {
             //获取项目
             project.setSkipNum((project.getCurrentPage() - 1) * PAGENUM.num);
@@ -220,20 +229,44 @@ public class ProjectManagerService {
                 return null;
             }
 
+            projectListViews = projectRelationInfo(projectTbs);
 
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+        return projectListViews;
+    }
+
+
+    /**
+     * 获取项目关联 评论 点赞 扩散 图片
+     *
+     * @param projectTbs
+     * @return
+     */
+    public List<ProjectListView> projectRelationInfo(List<ProjectTb> projectTbs) {
+
+        if (projectTbs == null) {
+            return null;
+        }
+
+        List<ProjectListView> projectListViews = new ArrayList<>();
+
+        try {
             //获取评论  组织条件
             PrCommentTb prComment = new PrCommentTb();
-            prComment.setSequence1("id");
+            prComment.setSequence1("p.id");
             prComment.setSequence1Type("desc");
 
             //获取点赞  组织条件
             PrPraiseTb prPraise = new PrPraiseTb();
-            prPraise.setSequence1("id");
+            prPraise.setSequence1("p.id");
             prPraise.setSequence1Type("desc");
 
             //获取扩散 组织条件
             PrShareTb prShare = new PrShareTb();
-            prShare.setSequence1("id");
+            prShare.setSequence1("p.id");
             prShare.setSequence1Type("desc");
 
             //获取图片  组织条件
@@ -244,6 +277,7 @@ public class ProjectManagerService {
             for (ProjectTb tb : projectTbs) {
 
                 ProjectListView projectListView = new ProjectListView();
+                projectListView.setProjectTb(tb);
 
                 //获取评论
                 prComment.setProjectId(tb.getId());
@@ -268,11 +302,11 @@ public class ProjectManagerService {
 
                 projectListViews.add(projectListView);
             }
-
         } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
+
         return projectListViews;
     }
 
